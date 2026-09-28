@@ -1,6 +1,6 @@
 # Database of Fails
 
-A full-stack web platform for sharing 3D printing fails, built in 2024.
+A full-stack web platform for sharing 3D printing fails.
 
 ## Tech Stack
 - **Backend:** Java, Spring Boot, PostgreSQL
