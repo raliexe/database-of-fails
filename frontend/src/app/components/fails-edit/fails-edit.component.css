@@ -1,0 +1,81 @@
+@import "bootstrap-icons";
+
+.icon-21 {
+  font-size: 21px;
+}
+
+.rounded-4 {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.image-container {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.file-name {
+  margin: 0.3rem 0 0.5rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 160px;
+}
+
+.card-header {
+  padding: unset;
+}
+
+.card-header img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.center-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.smaller-button {
+  padding: 0.5rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+.smaller-button i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.justify-left {
+  display: flex;
+  justify-content: left;
+}
+
+.justify-left-1 {
+  display: flex;
+  justify-content: left;
+  margin-left: 1rem;
+}
+
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.padding0 {
+  padding: 0rem 3rem 0rem 3rem;
+}
+
+.padding1 {
+  padding: 1rem 3rem 0rem 3rem;
+}

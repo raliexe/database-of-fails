@@ -1,0 +1,33 @@
+spring.datasource.url = jdbc:postgresql://localhost:5432/database_of_fails
+spring.datasource.username = YOUR_DB_USERNAME
+spring.datasource.password = YOUR_DB_PASSWORD
+
+spring.datasource.driverClassName = org.postgresql.Driver
+
+spring.jpa.properties.hibernate.default_schema = public
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto = create
+spring.jpa.generate-ddl = false
+spring.jpa.show-sql = true
+
+security.auth.header=Authorization
+security.auth.prefix=Bearer\u0020
+security.auth.login-uri=/api/v1/authentication
+security.jwt.secret: YOUR_JWT_SECRET
+# Use http://www.allkeysgenerator.com/ to generate secrets
+security.jwt.type=JWT
+security.jwt.issuer=secure-backend
+security.jwt.audience=secure-app
+# 12 hours in milliseconds
+security.jwt.expiration-time=43200000
+
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=YOUR_GMAIL_ADDRESS
+spring.mail.password=YOUR_GMAIL_APP_PASSWORD
+spring.mail.email=YOUR_GMAIL_ADDRESS
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.debug=true
+
+logging.level.org.springframework.security = DEBUG

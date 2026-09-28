@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+
+  <!-- Website Logo -->
+  <a class="navbar-brand mx-lg-5" style="font-family: 'Inter', fantasy; font-size: 2em" routerLink="">Database of Fails</a>
+
+  <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+
+    <ul class="navbar-nav" *ngIf="authService.isLoggedIn() && authService.getUserRole() ==='ADMIN'">
+      <li>
+        <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+      </li>
+    </ul>
+
+    <!-- Search -->
+    <!--<ul class="navbar-nav mr-auto" *ngIf="authService.isLoggedIn()">-->
+<!--    <ul class="navbar-nav">
+      <li>
+        <a class="nav-link" routerLink="/search" routerLinkActive="active">Search</a>
+      </li>
+    </ul>-->
+    <form *ngIf="authService.isLoggedIn()">
+      <div class="form-group" style="width: 330px; margin-left: 20px;">
+        <ng-select id="fail" name="fail"
+                   typeToSearchText="Start typing..."
+                   placeholder="Search for a fail..."
+                   [typeahead]="searchInput$"
+                   [loading]="searchLoading"
+                   (click)="redirect()"
+                   bindLabel="name"
+                   [items]="search$ | async"
+                   [(ngModel)]="selectedSearchItem"
+                   (change)="loadSearchItems()">
+        </ng-select>
+      </div>
+    </form>
+
+    <!-- Login/Register or Profile -->
+    <!--<div *ngIf="!authService.isLoggedIn()" style="display: flex; justify-content: flex-end; width: 100%; margin-right: 2em;">-->
+    <div style="display: flex; justify-content: flex-end; width: 100%; margin-right: 2em;">
+      <ul class="navbar-nav mr-auto">
+        <a class="nav-link" *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+        <a class="nav-link" *ngIf="!authService.isLoggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
+      </ul>
+    </div>
+
+    <div class="display: flex; justify-content: flex-end; width: 100%; margin-right: 5em;">
+      <div *ngIf="authService.isLoggedIn()" ngbDropdown display="dynamic" class="d-inline-block">
+        <button type="button" class="btn btn-header" id="dropdown1" ngbDropdownToggle>
+          <i class="bi bi-person"></i>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdown1">
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+            <button ngbDropdownItem>My Profile</button>
+          </a>
+          <a class="nav-link" routerLink="/fails" routerLinkActive="active">
+            <button ngbDropdownItem>My Fails</button>
+          </a>
+          <a class="nav-link" routerLink="/" routerLinkActive="active" (click)="authService.logoutUser()">
+            <button ngbDropdownItem>Logout</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>

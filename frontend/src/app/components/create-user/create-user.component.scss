@@ -1,0 +1,24 @@
+@import "bootstrap-icons";
+
+.rounded-4 {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.padding0 {
+  padding: 0rem 3rem 0rem 3rem;
+}
+
+.padding1 {
+  padding: 1rem 3rem 0rem 3rem;
+}
+
+.label {
+  display: flex;
+  justify-content: left;
+  margin-left: 1rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid #00838f;
+}

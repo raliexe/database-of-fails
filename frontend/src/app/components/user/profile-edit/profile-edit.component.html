@@ -1,0 +1,132 @@
+<div>
+  <div class="row">
+    <!-- Back Button -->
+    <div class="mx-auto">
+      <button class="btn btn-dark" (click)="goBack()" routerLinkActive="active"
+              style="position: fixed; left: 200px; top: 150px; border-radius: 10px;">
+        <i class="bi bi-arrow-left icon-size"></i>
+      </button>
+    </div>
+
+    <div class="col-8 mx-auto px-5 rounded-4">
+      <span class="anchor" id="formEdit"></span>
+      <h3 class="pt-4 pb-4">My profile</h3>
+
+      <div *ngIf="currentUser">
+        <form class="form-horizontal" (ngSubmit)="updateUser()" #editForm="ngForm">
+          <div class="form-group" style="padding: 1rem 3rem 0rem 3rem;">
+            <label for="nickname" style="display: flex; justify-content: left; margin-left: 1rem;">
+              <b style="color: red">*</b>Nickname
+            </label>
+            <div>
+              <input type="text" id="nickname" name="nickname" [(ngModel)]="userUpdate.nickname"
+                     class="form-control"
+                     aria-describedby="nicknameHelp" minlength="2" maxlength="32" required
+                     #nickname="ngModel">
+            </div>
+          </div>
+          <div *ngIf="nickname.touched && nickname.errors?.['minlength']" class="error mb-2"
+               style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+            <small class="form-text text-danger">
+              Nickname is too short!
+            </small>
+          </div>
+          <div *ngIf="nickname.touched && nickname.errors?.['maxlength']" class="error mb-2"
+               style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+            <small class="form-text text-danger">
+              Nickname is too long!
+            </small>
+          </div>
+          <div *ngIf="nickname.touched && nickname.errors?.['required']" class="error mb-2"
+               style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+            <small class="form-text text-danger">
+              Nickname is required!
+            </small>
+          </div>
+
+          <div class="form-group" style="padding: 1rem 3rem 0rem 3rem;">
+            <label for="email" style="display: flex; justify-content: left; margin-left: 1rem;">
+              <b style="color: red">*</b>Email
+            </label>
+            <div>
+              <input type="text" id="email" name="email" [(ngModel)]="userUpdate.email"
+                     class="form-control readonly" readonly
+                     aria-describedby="emailHelp" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                     maxlength="255" required #email="ngModel">
+            </div>
+          </div>
+          <div *ngIf="email.touched && !email.valid" class="error mb-2"
+               style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+            <small class="form-text text-danger">
+              Email is not well formed!
+            </small>
+          </div>
+
+          <div>
+          <!--<div *ngIf="showPasswordInputFields">-->
+            <div class="form-group" style="padding: 1rem 3rem 0rem 3rem;">
+              <label for="password" style="display: flex; justify-content: left; margin-left: 1rem;">
+                <b style="color: red">*</b>Password
+              </label>
+              <div>
+                <input type="password" id="password" name="password"
+                       [(ngModel)]="userUpdate.password"
+                       class="form-control"
+                       aria-describedby="passwordHelp" minlength="8" maxlength="32" required
+                       #password="ngModel">
+              </div>
+            </div>
+            <div *ngIf="password.touched && !password.valid" class="error mb-2"
+                 style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+              <small class="form-text text-danger">
+                Password must be between 8 and 32 characters!
+              </small>
+            </div>
+
+            <div class="form-group" style="padding: 1rem 3rem 0rem 3rem;">
+              <label for="passwordConfirm" style="display: flex; justify-content: left; margin-left: 1rem;">
+                <b style="color: red">*</b>Confirm Password
+              </label>
+              <div>
+                <input type="password" id="passwordConfirm" name="passwordConfirm"
+                       [(ngModel)]="userUpdate.passwordConfirmation"
+                       class="form-control"
+                       aria-describedby="passwordConfirmHelp" minlength="8" maxlength="32" required
+                       #passwordConfirm="ngModel">
+              </div>
+            </div>
+            <div *ngIf="passwordConfirm.touched && !passwordConfirm.valid" class="error mb-2"
+              style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+              <small class="form-text text-danger">
+                word must be between 8 and 32 characters!
+              </small>
+            </div>
+            <div *ngIf="passwordConfirm.valid && (passwordConfirm.value !== password.value)" class="error mb-2"
+                 style="display: flex; justify-content: left; margin-left: 1rem; padding: 0rem 3rem 0rem 3rem;">
+            <small class="form-text text-danger">
+              Passwords do not match!
+              </small>
+            </div>
+          </div>
+
+          <div style="padding: 1rem 3rem 1rem 3rem;">
+            <!--<button type="button" class="btn btn-dark"
+                    style="height: 44px; width:54px; margin-left: 15px"
+                    (click)="showPasswordFields()">
+              <i class="bi bi-lock-fill icon-size"></i>
+            </button>-->
+
+            <div style="display: inline;">
+              <button type="submit" [disabled]="(!editForm.form.valid || !editForm.form.dirty)"
+                      class="btn btn-success float-right icon-size"
+                      style="height: 44px; width:54px; margin-left: 15px">
+                <i class="bi bi-check-lg"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

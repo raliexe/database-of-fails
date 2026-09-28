@@ -1,0 +1,10 @@
+@import "bootstrap-icons";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.btn-header{
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.btn-header:hover{
+  color: rgba(255, 255, 255, 0.75);
+}

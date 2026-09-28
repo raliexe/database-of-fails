@@ -1,0 +1,45 @@
+<div>
+  <div class="row">
+    <div class="col-8 mx-auto px-5 rounded-4">
+      <span class="anchor" id="formLogin"></span>
+      <h3 class="pt-4 pb-4">Login</h3>
+
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="loginUser()" (keyup.enter)="loginUser()">
+        <div class="form-group padding1" >
+          <label for="inputUsername" class="label">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <input type="text" id="inputUsername" name="username" formControlName="username"
+                 class="form-control" aria-describedby="usernameHelp" required>
+        </div>
+        <div *ngIf="submitted && loginForm.controls.username.errors" class="error mb-2 padding0">
+          <small class="form-text text-danger label" *ngIf="loginForm.controls.username.errors.required">
+            Your email is required!
+          </small>
+        </div>
+
+        <div class="form-group padding1">
+          <label for="password" class="label">Password&nbsp;</label>
+          <input type="password" id="password" name="password" formControlName="password"
+                 class="form-control" required>
+        </div>
+        <div *ngIf="submitted && loginForm.controls.password.errors" class="error mb-2 padding0">
+          <small class="form-text text-danger label" *ngIf="loginForm.controls.password.errors.required">
+            Your password is required!
+          </small>
+        </div>
+
+        <div class="pt-4 pb-4" style="display: flex; justify-content: center">
+          <button (click)="loginUser()" class="btn btn-success">Login</button>
+        </div>
+      </form>
+
+      <div class="pt-4 pb-4" style="display: flex;">
+        <div class="col-md-6" style="display: flex; justify-content: center; align-items: center;">
+          Not a member?&nbsp;<a routerLink="/register" routerLinkActive="active">Register</a>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-link" (click)="forgotPassword()">Forgot your password?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div *ngIf="fail" class="grid grid-nogutter surface-section text-800">
+
+  <div class="col-8 p-3 text-center md:text-left flex">
+    <!-- Back Button -->
+    <button class="btn btn-dark" (click)="goBack()" routerLinkActive="active"
+            style="position: fixed; left: 50px; top: 150px; border-radius: 10px;">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <section>
+      <span class="block text-4xl font-bold mb-1" [textContent]="name"></span>
+      <span class="block text-1xl font-light mb-2" [textContent]="date| date:'MMM dd, y'"></span>
+      <p [textContent]="description"></p>
+
+      <div class="btn-group" style="width: 100%;">
+        <button *ngIf="!likedByUser" class="btn btn-outline-dark" (click)="likeFail()">
+          <i class="bi bi-heart"></i>
+          {{fail.likes}}
+        </button>
+        <button *ngIf="likedByUser" class="btn btn-outline-dark" (click)="unlikeFail()">
+          <i class="bi bi-heart-fill"></i>
+          {{fail.likes}}
+        </button>
+
+        <button class="btn btn-outline-dark" (click)="showComments()">
+          <i class="bi bi-chat-right"></i>
+          {{fail.comments}}
+        </button>
+        <button class="btn btn-outline-dark" (click)="loadPdf()">
+          <i class="bi bi-filetype-pdf"></i>
+        </button>
+      </div>
+
+      <div *ngIf="showClick">
+
+        <section>
+          <div class="container my-3 py-3">
+            <div class="row d-flex justify-content-center">
+              <div class="col-24">
+
+                <form class="form-horizontal" [formGroup]="commentForm" (ngSubmit)="commentFail()" >
+                  <div class="card" style="padding: 5px 20px 5px 20px">
+
+                    <div class="py-3 border-0">
+                      <div class="d-flex flex-start w-100">
+                        <div class="form-outline w-100">
+                          <textarea type="text" id="inputMessage" name="message" formControlName="message" class="form-control"
+                                    class="form-control" rows="3" placeholder="Write a comment..."
+                              style="background: #fff;"></textarea>
+                          <!--<label class="form-label" for="inputMessage">Message</label>-->
+                        </div>
+                      </div>
+                      <div class="float-end mt-2 pt-1">
+                        <button type="button" class="btn btn-dark btn-sm" (click)="commentFail()">
+                          <i class="bi bi-send-fill"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <!-- This is the tree node template for leaf nodes -->
+          <cdk-tree-node *cdkTreeNodeDef="let node" cdkTreeNodePadding
+                         [style.display]="shouldRender(node) ? 'flex' : 'none'"
+                         class="example-tree-node">
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <div class="container">
+              <div class="row d-flex justify-content-center">
+                <div class="col-12">
+                  <div class="card" style="padding: 20px 20px 20px 20px">
+                    <div class="d-flex flex-start align-items-center">
+                      <div>
+                        <h6 class="fw-bold text-primary mb-1">{{node.userName}}</h6>
+                        <p class="text-muted small mb-0">{{node.created | date:'MMM dd, y'}}</p>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-1 pb-2">{{node.message}}</p>
+                    <div class="small d-flex justify-content-start">
+                      <div class="d-flex align-items-center me-3"
+                           style="display: flex; align-items: center; margin-right: 20px; cursor: pointer;">
+                        <i class="bi bi-arrow-return-right" style="margin-right: 5px"></i>Reply
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--<button mat-icon-button disabled></button>-->
+
+                </div>
+              </div>
+            </div>
+
+          </cdk-tree-node>
+          <!-- This is the tree node template for expandable nodes -->
+          <cdk-tree-node *cdkTreeNodeDef="let node; when: hasChild" cdkTreeNodePadding
+                         [style.display]="shouldRender(node) ? 'flex' : 'none'"
+                         class="example-tree-node">
+
+            <div class="container">
+              <div class="row d-flex justify-content-center">
+                <div class="col-24">
+                  <div class="card" style="padding: 20px 20px 20px 20px;">
+                    <div class="d-flex flex-start align-items-center">
+                      <div>
+                        <h6 class="fw-bold text-primary mb-1">{{node.userName}}</h6>
+                        <p class="text-muted small mb-0">{{node.created | date:'MMM dd, y'}}</p>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-1 pb-2">{{node.message}}</p>
+                    <div class="small d-flex justify-content-start" >
+                      <div class="d-flex align-items-center me-3"
+                           style="display: flex; align-items: center; margin-right: 20px; cursor: pointer;">
+                        <i class="bi bi-arrow-return-right" style="margin-right: 5px"></i>Reply
+                      </div>
+                    </div>
+                  </div>
+
+                  <div mat-icon-button cdkTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name"
+                    (click)="node.isExpanded = !node.isExpanded"
+                       [style.visibility]="node.expandable ? 'visible' : 'hidden'"
+                       style="display: flex; align-items: center; cursor: pointer;">
+                    <mat-icon class="mat-icon-rtl-mirror" style="font-size: 20px;">
+                      {{treeControl.isExpanded(node) ? 'expand_more' : 'expand_less'}}
+              </mat-icon>
+                    <h6 class="small fw-bold text-primary mb-1" style="font-size: 14px;">
+                      {{treeControl.isExpanded(node) ? 'view' : 'hide'}} n replies
+                    </h6>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </cdk-tree-node>
+        </cdk-tree>
+
+      </div>
+
+    </section>
+  </div>
+
+  <div class="col-4 p-3 main-image-container">
+    <div class="col-12 p-100">
+      <img [src]="mainImage" alt="Image" width="100%" height="100%" class="main-image">
+    </div >
+    <div class="p-10 mt-3 child-image-container">
+      <ng-container *ngFor="let img of childImages">
+        <div class="p-1 m-1 child-image-div">
+          <img [src]="img.content" alt="Image" width="100%" height="100%"
+               class="child-image" (click)="focus(img.id)">
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,43 @@
+<h3>My Fails</h3>
+
+<div class="container" *ngIf="fails"><!-- *ngIf="fails"    todo -->
+  <div style="height: 425px; width: 310px; display: flex; justify-content: center; align-items: center;">
+    <button type="button" class="btn btn-dark" routerLink="/fails/add" routerLinkActive="active"
+            style="height: 130px; width: 130px; border-radius: 10px;">
+      <i class="bi bi-plus-lg icon-50"></i>
+    </button>
+  </div>
+
+<!--  <div  *ngIf="(fails === null || fails.length === 0)">
+    <h4 [textContent]="'No fails!'"></h4>
+  </div>-->
+  <ng-container *ngFor="let fail of fails">
+    <div class="card">
+      <div class="card-header" routerLink="{{'/fails/' + fail.id}}" routerLinkActive="active">
+        <img src="{{'data:image/png;base64,' + fail.mainImage.content}}">
+      </div>
+      <div class="card-body">
+        <span class="tag tag-black" style="position:absolute; margin-left: auto; top: 215px;">{{fail.date | date}}</span>
+        <h5 class="card-text" style="text-align: left;">{{fail.name}}</h5>
+
+        <!--Edit/Delete Buttons-->
+        <div class="buttons" style="position: absolute; right: 30px; top: 335px;">
+          <button class="btn btn-dark" style="border-radius: 10px; margin-right: 10px"
+                  routerLink="{{'/fails/' + fail.id + '/edit'}}" routerLinkActive="active">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-danger float-right" style="border-radius: 10px;"
+                  (click)="deleteFailsById(fail.id)">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<!--Scroll To Top Button-->
+<button class="btn btn-dark float-right" (click)="scrollToTop()"
+        style="position: fixed; right: 35px; bottom: 50px; border-radius: 10px;">
+  <i class="bi bi-arrow-up"></i>
+</button>

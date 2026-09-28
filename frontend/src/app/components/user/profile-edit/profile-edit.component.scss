@@ -1,0 +1,14 @@
+@import "bootstrap-icons";
+
+.rounded-4 {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.readonly {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid #00838f;
+}

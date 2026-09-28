@@ -1,0 +1,34 @@
+@import "bootstrap-icons";
+
+body {
+  background-color: #00838F;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid #00838f;
+}
+
+.rounded-4 {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0rem 1rem 0rem;
+}
+
+.btn-size {
+  height: 44px;
+  width:54px;
+  margin-left: 15px
+}
+
+::ng-deep nav > ul > li.current {
+  background-color: gray !important;
+}
+
+::ng-deep ul > li.disabled > span {
+  color: gray !important;
+}

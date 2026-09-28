@@ -1,0 +1,123 @@
+<div>
+  <div class="row">
+
+    <!-- Back Button -->
+    <div class="col-1 mx-auto">
+      <button class="btn btn-dark" (click)="goBack()" routerLinkActive="active"
+              style="position: fixed; left: 135px; top: 150px; border-radius: 10px;">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+    </div>
+
+    <div class="col-8 mx-auto px-5 rounded-4">
+
+      <span class="anchor" id="formCreate"></span>
+      <h3 class="pt-4 pb-4">Add Fail</h3>
+
+      <form class="form-horizontal" [formGroup]="createForm" (ngSubmit)="addFail()" >
+
+        <!-- Name -->
+        <div class="form-group padding1">
+          <label for="inputName" class="justify-left-1">
+            <b style="color: red">*</b>Name:
+          </label>
+          <div>
+            <input type="text" id="inputName" name="name" formControlName="name" class="form-control"
+                   aria-describedby="nameHelp" style="width: 70%;" required>
+          </div>
+        </div>
+        <div *ngIf="createForm.controls['name'].touched && createForm.controls['name'].errors"
+             class="error mb-2 justify-left-1 padding0">
+          <small class="form-text text-danger" *ngIf="createForm.controls['name'].errors['required']">
+            Name is required!
+          </small>
+          <small class="form-text text-danger" *ngIf="createForm.controls['name'].errors?.['maxlength']">
+            Name is too long!
+          </small>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group padding1">
+          <label for="inputDescription" class="justify-left-1">
+            <b style="color: red">*</b>Description:
+          </label>
+          <div>
+          <textarea rows="5" id="inputDescription" name="description" formControlName="description"
+                    class="form-control"
+                    aria-describedby="descriptionHelp" style="width: 100%;" required></textarea>
+          </div>
+        </div>
+        <div *ngIf="createForm.controls['description'].touched && createForm.controls['description'].errors"
+             class="error mb-2 justify-left-1 padding0">
+          <small class="form-text text-danger" *ngIf="createForm.controls['description'].errors['required']">
+            Description is required!
+          </small>
+          <small class="form-text text-danger" *ngIf="createForm.controls['description'].errors?.['maxlength']">
+            Description is too long!
+          </small>
+        </div>
+
+        <!-- Date -->
+        <div class="form-group padding1">
+          <label for="inputDate" class="justify-left-1">
+            <b style="color: red">*</b>Date:
+          </label>
+          <div>
+            <input type="date" id="inputDate" name="date" formControlName="date" class="form-control"
+                   style="width: 40%;" required>
+          </div>
+        </div>
+        <div *ngIf="createForm.controls['date'].touched && createForm.controls['date'].errors"
+             class="error mb-2 justify-left-1 padding0">
+          <small class="form-text text-danger" *ngIf="createForm.controls['date'].errors['required']">
+            Date is required!
+          </small>
+        </div>
+
+        <!-- Image -->
+        <div class="form-group padding1">
+          <label for="inputImage" class="justify-left-1">
+            <b style="color: red">*</b>Select image:
+          </label>
+          <div>
+            <input #inputImage type="file" id="inputImage" name="image" formControlName="image"
+                   class="form-control" accept="image/*" style="width: 40%;"
+                   (change)="onImageUpload($event)" required>
+            <ng-container>
+              <div *ngIf="imageContent && imageUpload" class="card mt-3">
+                <button class="btn btn-light btn-outline-dark float-right smaller-button"
+                        (click)="removeImage(inputImage)"
+                        style="position: absolute; top: 10px; right: 10px; border-radius: 10px;">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+                <div class="card-header">
+                  <img [src]="imageContent" alt="Image" class="center-image"/>
+                </div>
+                <div class="file-name">{{ transformImageName() }}</div>
+              </div>
+              <div *ngIf="imageUpload && imageUpload.size > 1048575" class="justify-left">
+                <small class="form-text text-danger">
+                  Image size must be under 1 MB!
+                </small>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Add/Cancel Buttons -->
+        <div class="pt-4 pb-4 justify-center">
+          <button type="button" [disabled]="createForm.invalid || imageUpload == null || imageUpload.size > 1048575"
+                  class="btn btn-success" style="height: 44px; width:54px;" (click)="addFail()">
+            <i class="bi bi-check2 icon-21"></i>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="col-1 mx-auto">
+    </div>
+
+  </div>
+</div>

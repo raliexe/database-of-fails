@@ -1,0 +1,14 @@
+# IDE settings
+.idea/
+*.iml
+.vscode/
+
+# Logs and JVM crash files
+*.log
+hs_err_pid*
+replay_pid*
+
+# Backups and OS files
+*.bak
+.DS_Store
+Thumbs.db

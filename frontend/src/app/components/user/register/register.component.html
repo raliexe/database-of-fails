@@ -1,0 +1,86 @@
+<div>
+  <div class="row">
+    <div class="col-8 mx-auto px-5 rounded-4">
+      <span class="anchor" id="formRegistration"></span>
+      <h3 class="pt-4 pb-4">Register</h3>
+
+      <form class="form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <div class="form-group padding1">
+          <label for="inputNickname" class="label"><b style="color: red">*</b>Nickname</label>
+          <input type="text" id="inputNickname" name="nickname" formControlName="nickname"
+                 class="form-control" aria-describedby="nicknameHelp" required>
+        </div>
+        <div *ngIf="registerForm.controls.nickname.touched && registerForm.controls.nickname.errors"
+             class="error mb-2 padding0">
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.nickname.errors.required">
+            Nickname is required!
+          </small>
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.nickname.errors?.['minlength']">
+            Nickname is too short!
+          </small>
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.nickname.errors?.['maxlength']">
+            Nickname is too long!
+          </small>
+        </div>
+
+        <div class="form-group padding1">
+          <label for="inputEmail" class="label"><b style="color: red">*</b>Email</label>
+          <input type="text" id="inputEmail" name="email" formControlName="email"
+                 class="form-control" aria-describedby="emailHelp"
+                 pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required>
+        </div>
+        <div *ngIf="registerForm.controls.email.touched && registerForm.controls.email.errors"
+             class="error mb-2 padding0">
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.email.errors.required">
+            Email is required!
+          </small>
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.email.errors?.pattern">
+            Invalid email!
+          </small>
+        </div>
+
+        <div class="form-group padding1">
+          <label for="password" class="label"><b style="color: red">*</b>Password</label>
+          <input type="password" id="password" name="password" formControlName="password"
+                 class="form-control" required>
+        </div>
+        <div *ngIf="registerForm.controls.password.touched && registerForm.controls.password.errors"
+             class="error mb-2 padding0">
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.password.errors.required">
+            Password is required!
+          </small>
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.password.errors?.['minlength']">
+            Password must be at least 8 symbols!
+          </small>
+        </div>
+
+        <div class="form-group padding1">
+          <label for="passwordConfirmation" class="label"><b style="color: red">*</b>Confirm password</label>
+          <input type="password" id="passwordConfirmation" name="passwordConfirmation" formControlName="passwordConfirmation"
+                 class="form-control" required>
+        </div>
+        <div *ngIf="registerForm.controls.passwordConfirmation.errors && registerForm.controls.passwordConfirmation.touched"
+             class="error mb-2 padding0">
+          <small class="form-text text-danger label" *ngIf="registerForm.controls.passwordConfirmation.errors.required">
+            Password confirmation is required!
+          </small>
+          <small class="form-text text-danger label"
+                 *ngIf="registerForm.controls.password.value !== registerForm.controls.passwordConfirmation.value &&
+                        registerForm.controls.passwordConfirmation.touched">
+            Passwords do not match!
+          </small>
+        </div>
+
+        <div class="pt-4 pb-4" style="display: flex; justify-content: center">
+            <button type="button" [disabled]="registerForm.invalid" (click)="registerUser()"
+                    class="btn btn-success">Register</button>
+        </div>
+
+        <div class="form-group mb-2" style="display: flex; justify-content: center; align-items: center;">
+          Already a user?&nbsp;
+          <a routerLink="/login" routerLinkActive="active">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

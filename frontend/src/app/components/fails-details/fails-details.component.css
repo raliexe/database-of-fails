@@ -1,0 +1,45 @@
+@import "bootstrap-icons";
+@import "primeflex/primeflex.css";
+
+section {
+  max-width: 100%;
+  width: 100%;
+}
+
+.example-tree-node {
+  display: flex;
+  align-items: center;
+}
+
+.main-image-container {
+  flex-direction: center;
+}
+
+.main-image {
+  object-fit: contain;
+}
+
+.child-image-container {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.child-image {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.child-image-div {
+  border: 0px solid rgba(0, 0, 0, 0.75);
+}
+
+.child-image-div img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.child-image-div img:hover {
+  opacity: 1;
+}
